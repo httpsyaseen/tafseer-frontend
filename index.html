@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tafseer — Dream Interpretation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <form class="card" id="dream-form">
+
+      <!-- Dream -->
+      <section class="field">
+        <label class="field-label" for="dream">Your dream</label>
+        <textarea id="dream" name="dream" dir="auto" rows="6"
+                  placeholder="رأيت في المنام..." required></textarea>
+        <p class="hint">Write your dream in Arabic or English.</p>
+      </section>
+
+      <!-- Authority -->
+      <fieldset class="group">
+        <legend>Authority</legend>
+
+        <div class="sources">
+          <label class="source">
+            <input type="radio" name="source" value="nabulsi">
+            <span class="source-body">
+              <span class="source-name"><i class="dot"></i>Al-Nabulsi</span>
+              <span class="source-desc">Abd al-Ghani al-Nabulsi</span>
+            </span>
+          </label>
+
+          <label class="source">
+            <input type="radio" name="source" value="ibn_sirin" checked>
+            <span class="source-body">
+              <span class="source-name"><i class="dot"></i>Ibn Sirin</span>
+              <span class="source-desc">Attributed to Ibn Sirin</span>
+            </span>
+          </label>
+
+          <label class="source">
+            <input type="radio" name="source" value="ibn_shaheen">
+            <span class="source-body">
+              <span class="source-name"><i class="dot"></i>Ibn Shahin</span>
+              <span class="source-desc">Ibn Shahin al-Zahiri</span>
+            </span>
+          </label>
+
+          <label class="source">
+            <input type="radio" name="source" value="tabir">
+            <span class="source-body">
+              <span class="source-name"><i class="dot"></i>Ta'bir al-Ru'ya</span>
+              <span class="source-desc">Ta'bir al-Ru'ya</span>
+            </span>
+          </label>
+
+          <label class="source">
+            <input type="radio" name="source" value="sadiq">
+            <span class="source-body">
+              <span class="source-name"><i class="dot dot--green"></i>Imam Al-Sadiq</span>
+              <span class="source-desc">Attributed to Imam Ja'far al-Sadiq and the Ahl al-Bayt</span>
+            </span>
+          </label>
+        </div>
+
+        <p class="hint">Pick one authority to read on its approach alone.</p>
+
+        <fieldset class="group group--dashed">
+          <legend>Alternative psychological lens (optional)</legend>
+          <div class="sources">
+            <label class="source">
+              <input type="radio" name="source" value="freud">
+              <span class="source-body">
+                <span class="source-name"><i class="dot dot--purple"></i>Sigmund Freud</span>
+                <span class="source-desc">Sigmund Freud</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+      </fieldset>
+
+      <!-- About yourself -->
+      <section class="group group--panel">
+        <h2>Add something about yourself</h2>
+        <p class="lead">The books read a symbol differently for a man and a woman, the married and the unmarried — so telling us changes the reading.</p>
+
+        <div class="ctx-grid">
+          <label><span>Gender</span>
+            <select id="f-jins"><option value="">—</option>
+              <option value="ذكر">Male</option><option value="أنثى">Female</option>
+            </select></label>
+          <label><span>Marital status</span>
+            <select id="f-hala"><option value="">—</option>
+              <option value="أعزب">Single</option><option value="متزوج">Married</option><option value="مطلق">Divorced</option><option value="أرمل">Widowed</option>
+            </select></label>
+          <label><span>Age range</span>
+            <select id="f-umr"><option value="">—</option>
+              <option value="أقل من ٢٠">Under 20</option><option value="٢٠-٣٠">20-30</option><option value="٣٠-٤٠">30-40</option><option value="٤٠-٦٠">40-60</option><option value="أكثر من ٦٠">Over 60</option>
+            </select></label>
+          <label><span>Waking state</span>
+            <select id="f-shuur"><option value="">—</option>
+              <option value="مطمئن">At ease</option><option value="قلق">Anxious</option><option value="حزن">Sad</option><option value="خوف">Fearful</option><option value="فرح">Joyful</option>
+            </select></label>
+          <label><span>Pain in the dream</span>
+            <select id="f-alam"><option value="">—</option>
+              <option value="نعم">Yes</option><option value="لا">No</option>
+            </select></label>
+          <label><span>Recurring</span>
+            <select id="f-takrar"><option value="">—</option>
+              <option value="نعم">Yes</option><option value="نعم، مراراً">Yes, several times</option><option value="لا">No</option>
+            </select></label>
+          <label><span>Time of the dream</span>
+            <select id="f-waqt"><option value="">—</option>
+              <option value="أول الليل">Early night</option><option value="آخر الليل">Before dawn</option><option value="بعد الفجر">After fajr</option><option value="القيلولة">Daytime nap</option>
+            </select></label>
+          <label><span>Istikhara prayer beforehand</span>
+            <select id="f-istikhara"><option value="">—</option>
+              <option value="نعم">Yes</option><option value="لا">No</option><option value="لم يُذكر">Not mentioned</option>
+            </select></label>
+          <label><span>Clarity of details</span>
+            <select id="f-wuduh"><option value="">—</option>
+              <option value="واضحة جداً">Very clear</option><option value="متوسطة">Somewhat clear</option><option value="مشوّشة">Hazy</option>
+            </select></label>
+          <label><span>State before sleep</span>
+            <select id="f-qabl"><option value="">—</option>
+              <option value="مطمئن">Settled</option><option value="مرهق وكثير التفكير">Exhausted, racing thoughts</option><option value="على وضوء وذكر">In wudu, remembering God</option><option value="بعد خصام أو ضيق">After conflict or distress</option>
+            </select></label>
+          <label><span>Was the place familiar</span>
+            <select id="f-makan"><option value="">—</option>
+              <option value="نعم، مكاني المعتاد">Yes, my own place</option><option value="مكان أعرفه">Somewhere I know</option><option value="مكان غريب">A strange place</option>
+            </select></label>
+        </div>
+      </section>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button type="submit" class="btn btn--primary">Interpret</button>
+        <button type="reset" class="btn btn--ghost">Clear</button>
+      </div>
+      <p class="status" id="status" role="status"></p>
+
+    </form>
+
+    <section class="result" id="result" hidden></section>
+  </main>
+  <script src="result.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
