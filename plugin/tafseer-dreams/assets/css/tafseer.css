@@ -1,0 +1,1136 @@
+/* =========================================================
+   Tafseer — "night & manuscript"
+   Deep indigo for the night, parchment for the page, gold for the light.
+   ========================================================= */
+
+.tafseer-app {
+  --bg: #f5f1e8;
+  --surface: #fffcf6;
+  --surface-2: #f2ebdc;
+  --border: #e3d9c4;
+  --border-strong: #cdbd9b;
+  --ink: #1d2233;
+  --ink-soft: #3a3f52;
+  --muted: #6b6f7c;
+
+  --night: #18213d;
+  --night-2: #222d4f;
+  --night-ink: #f1efe8;
+  --night-muted: #b3bad0;
+
+  --gold: #b3833a;
+  --gold-strong: #8a6124;
+  --gold-soft: #f3e6cc;
+  --teal: #2e6b62;
+  --teal-soft: #e3efec;
+  --rose: #a44d3c;
+  --rose-soft: #f6e4df;
+  --rose-night: #3a1f28;
+  --violet-night: #2a2742;
+
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgba(29, 34, 51, 0.05), 0 6px 20px rgba(29, 34, 51, 0.06);
+  --focus: 0 0 0 3px color-mix(in srgb, var(--gold) 35%, transparent);
+
+  --font-ui: "Inter", system-ui, -apple-system, sans-serif;
+  --font-read: "Lora", "Noto Naskh Arabic", Georgia, serif;
+  --font-title: "Lora", "Amiri", Georgia, serif;
+  --font-ar: "Noto Naskh Arabic", "Amiri", serif;
+}
+
+
+.tafseer-app,
+.tafseer-app *,
+.tafseer-app *::before,
+.tafseer-app *::after {
+  box-sizing: border-box;
+}
+.tafseer-app [hidden] {
+  display: none !important;
+}
+
+.tafseer-app {
+  margin: 0 auto;
+  background: var(--bg);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font: 15px/1.6 var(--font-ui);
+  text-align: start;
+  -webkit-font-smoothing: antialiased;
+  /* room for sticky theme headers when we scroll the app into view */
+  scroll-margin-top: calc(var(--wp-admin--admin-bar--height, 0px) + 24px);
+}
+
+/* Themes style bare elements (h2, button, blockquote, select...) — undo what would leak in. */
+.tafseer-app h1,
+.tafseer-app h2,
+.tafseer-app h3 {
+  color: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.tafseer-app h1::before,
+.tafseer-app h1::after,
+.tafseer-app h2::before,
+.tafseer-app h2::after,
+.tafseer-app h3::before,
+.tafseer-app h3::after,
+.tafseer-app blockquote::before,
+.tafseer-app blockquote::after {
+  content: none;
+}
+.tafseer-app blockquote {
+  quotes: none;
+  font-style: normal;
+  border-top: 0;
+  border-bottom: 0;
+  border-right: 0;
+  box-shadow: none;
+}
+.tafseer-app button {
+  text-transform: none;
+  letter-spacing: normal;
+  box-shadow: none;
+  min-height: 0;
+  line-height: 1.2;
+  text-shadow: none;
+}
+.tafseer-app textarea,
+.tafseer-app select {
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  box-shadow: none;
+}
+.tafseer-app p,
+.tafseer-app ol,
+.tafseer-app ul {
+  margin-left: 0;
+  margin-right: 0;
+}
+.tafseer-app .r-nav a,
+.tafseer-app .t-btn {
+  text-decoration: none;
+}
+
+.tafseer-app a {
+  color: var(--gold-strong);
+  text-underline-offset: 2px;
+}
+.tafseer-app a:hover {
+  color: var(--gold);
+}
+
+
+
+.tafseer-app .t-page {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+.tafseer-app .t-intro {
+  margin-bottom: 24px;
+}
+
+.tafseer-app .t-intro h2 {
+  margin: 0 0 6px;
+  font: 600 30px/1.25 var(--font-title);
+  letter-spacing: -0.01em;
+}
+
+.tafseer-app .t-intro p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 600px;
+}
+
+/* ---------- form ---------- */
+
+.tafseer-app .t-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.tafseer-app .t-step {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tafseer-app .t-step-head {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.tafseer-app .t-step-no {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--night);
+  color: #e3be72;
+  font: 600 14px/1 var(--font-ui);
+}
+
+.tafseer-app .t-step-head h2 {
+  margin: 2px 0 2px;
+  font: 600 18px/1.3 var(--font-title);
+}
+
+.tafseer-app .t-step-head p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.tafseer-app .t-optional {
+  margin-inline-start: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  font: 500 11px/1.4 var(--font-ui);
+  color: var(--muted);
+  vertical-align: middle;
+}
+
+.tafseer-app textarea {
+  display: block;
+  width: 100%;
+  min-height: 170px;
+  resize: vertical;
+  padding: 14px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font: 18px/1.9 var(--font-read);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s,
+    background 0.15s;
+}
+
+.tafseer-app textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.75;
+}
+
+.tafseer-app textarea:focus,
+.tafseer-app select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: var(--focus);
+  background: var(--surface);
+}
+
+.tafseer-app .t-field-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.tafseer-app .t-counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* authority cards */
+
+.tafseer-app .t-sources {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tafseer-app .t-source {
+  position: relative;
+  cursor: pointer;
+}
+
+.tafseer-app .t-source input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tafseer-app .t-source-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  height: 100%;
+  padding: 12px 14px 12px 38px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition:
+    border-color 0.15s,
+    background 0.15s,
+    box-shadow 0.15s;
+}
+
+/* radio ring */
+.tafseer-app .t-source-body::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 15px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-strong);
+  background: var(--surface);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.tafseer-app .t-source:hover .t-source-body {
+  border-color: var(--border-strong);
+}
+
+.tafseer-app .t-source input:checked + .t-source-body {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  box-shadow: 0 0 0 1px var(--gold) inset;
+}
+
+.tafseer-app .t-source input:checked + .t-source-body::before {
+  border-color: var(--gold);
+  box-shadow:
+    0 0 0 3px var(--surface) inset,
+    0 0 0 10px var(--gold) inset;
+}
+
+.tafseer-app .t-source input:focus-visible + .t-source-body {
+  box-shadow: var(--focus);
+}
+
+.tafseer-app .t-source-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.tafseer-app .t-source-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.tafseer-app .t-source--alt .t-source-body {
+  border-style: dashed;
+}
+
+.tafseer-app .t-source-flag {
+  margin-inline-start: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* context selects */
+
+.tafseer-app .t-ctx-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px 12px;
+}
+
+.tafseer-app .t-ctx-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.tafseer-app .t-ctx-grid span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tafseer-app select {
+  width: 100%;
+  appearance: none;
+  padding: 9px 32px 9px 11px;
+  background: var(--surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b3833a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
+    no-repeat right 11px center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--ink);
+  font: 14px var(--font-ui);
+  cursor: pointer;
+}
+
+.tafseer-app .t-form-actions {
+  display: flex;
+  gap: 10px;
+  padding: 20px 24px;
+  background: var(--surface-2);
+}
+
+.tafseer-app .t-status {
+  margin: 0;
+  padding: 0 24px;
+  color: var(--rose);
+  font-size: 14px;
+}
+
+.tafseer-app .t-status:not(:empty) {
+  padding: 0 24px 18px;
+  background: var(--surface-2);
+}
+
+/* ---------- buttons ---------- */
+
+.tafseer-app .t-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font: 600 14px/1.2 var(--font-ui);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.05s;
+}
+
+.tafseer-app .t-btn:active {
+  transform: translateY(1px);
+}
+.tafseer-app .t-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+.tafseer-app .t-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.tafseer-app .t-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.tafseer-app .t-btn--primary {
+  background: var(--night);
+  color: var(--night-ink);
+  border: 1px solid var(--night);
+}
+
+.tafseer-app .t-btn--primary:hover {
+  background: var(--night-2);
+}
+
+.tafseer-app .t-btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border-strong);
+}
+
+.tafseer-app .t-btn--ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold-strong);
+}
+
+.tafseer-app .t-btn--lg {
+  padding: 13px 22px;
+  font-size: 15px;
+}
+.tafseer-app .t-btn--sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+/* ---------- loading ---------- */
+
+.tafseer-app .t-loading {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.tafseer-app .t-loading-moon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  box-shadow: inset -14px -4px 0 0 var(--gold);
+  animation: tafseer-moon 2.4s ease-in-out infinite;
+}
+
+@keyframes tafseer-moon {
+  0%,
+  100% {
+    transform: rotate(-12deg);
+    opacity: 0.75;
+  }
+  50% {
+    transform: rotate(12deg);
+    opacity: 1;
+  }
+}
+
+.tafseer-app .t-loading h2 {
+  margin: 0 0 4px;
+  font: 600 22px/1.3 var(--font-title);
+}
+.tafseer-app .t-loading-note {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.tafseer-app .t-loading-steps {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 320px;
+  text-align: start;
+  display: grid;
+  gap: 10px;
+}
+
+.tafseer-app .t-loading-steps li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.tafseer-app .t-loading-steps li::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-strong);
+}
+
+.tafseer-app .t-loading-steps li.is-active {
+  color: var(--ink);
+  font-weight: 500;
+}
+.tafseer-app .t-loading-steps li.is-active::before {
+  border-color: var(--gold);
+  background: var(--gold);
+  animation: tafseer-pulse 1.2s ease-in-out infinite;
+}
+.tafseer-app .t-loading-steps li.is-done {
+  color: var(--ink-soft);
+}
+.tafseer-app .t-loading-steps li.is-done::before {
+  border-color: var(--teal);
+  background: var(--teal);
+}
+
+@keyframes tafseer-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tafseer-app .t-loading-moon,
+  .tafseer-app .t-loading-steps li.is-active::before {
+    animation: none;
+  }
+}
+
+/* ---------- result ---------- */
+
+.tafseer-app .t-result {
+  display: grid;
+  gap: 22px;
+}
+
+.tafseer-app .t-result [dir="auto"],
+.tafseer-app .t-result [dir="rtl"] {
+  unicode-bidi: plaintext;
+}
+
+.tafseer-app .r-dream {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+
+.tafseer-app .r-dream-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.tafseer-app .r-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.tafseer-app .r-dream-text {
+  margin: 0;
+  font: 17px/1.9 var(--font-read);
+  color: var(--ink-soft);
+  white-space: pre-wrap;
+}
+
+/* hero */
+
+.tafseer-app .r-hero {
+  --hero-bg: var(--night);
+  --hero-glow: rgba(227, 190, 114, 0.16);
+  background:
+    radial-gradient(120% 90% at 50% -10%, var(--hero-glow), transparent 60%),
+    var(--hero-bg);
+  color: var(--night-ink);
+  border-radius: var(--radius);
+  padding: 32px 28px 22px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.tafseer-app .r-hero--disturbing_dream {
+  --hero-bg: var(--rose-night);
+  --hero-glow: rgba(224, 138, 118, 0.18);
+}
+.tafseer-app .r-hero--self_talk {
+  --hero-bg: var(--violet-night);
+  --hero-glow: rgba(179, 186, 208, 0.16);
+}
+
+.tafseer-app .r-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 1px solid rgba(227, 190, 114, 0.5);
+  border-radius: 999px;
+  font: 500 13px/1.5 var(--font-ar);
+  color: #e3be72;
+}
+
+.tafseer-app .r-title {
+  margin: 16px auto 14px;
+  max-width: 620px;
+  font: 700 27px/1.55 var(--font-title);
+}
+
+.tafseer-app .r-short {
+  margin: 0 auto;
+  max-width: 600px;
+  font: 17px/1.95 var(--font-read);
+  color: var(--night-muted);
+  text-align: start;
+  border-inline-start: 2px solid #e3be72;
+  padding-inline-start: 16px;
+}
+
+.tafseer-app .r-based {
+  margin: 22px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 12px;
+  color: var(--night-muted);
+}
+
+.tafseer-app .r-based a {
+  color: #e3be72;
+}
+
+/* sunna response */
+
+.tafseer-app .r-sunna {
+  background: var(--teal-soft);
+  border: 1px solid color-mix(in srgb, var(--teal) 40%, transparent);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+}
+
+.tafseer-app .r-sunna-title {
+  margin: 0 0 12px;
+  font: 600 16px/1.5 var(--font-title);
+  color: var(--teal);
+}
+
+.tafseer-app .r-sunna-steps {
+  margin: 0;
+  padding-inline-start: 22px;
+  display: grid;
+  gap: 6px;
+  font: 16px/1.8 var(--font-read);
+}
+
+.tafseer-app .r-sunna-steps li::marker {
+  color: var(--teal);
+  font-weight: 600;
+}
+
+.tafseer-app .r-sunna-promise {
+  margin: 12px 0 0;
+  font: 600 15px/1.7 var(--font-read);
+  color: var(--teal);
+}
+
+.tafseer-app .r-sunna-source {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.tafseer-app .r-dua {
+  margin: 14px 0 0;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border-inline-start: 3px solid var(--teal);
+  font:
+    18px/1.9 "Amiri",
+    var(--font-read);
+  color: var(--ink);
+}
+
+/* the dua inside a card (good dreams) */
+.tafseer-app .r-card .r-dua {
+  background: var(--gold-soft);
+  border-inline-start-color: var(--gold);
+}
+
+/* section nav */
+
+.tafseer-app .r-nav {
+  position: sticky;
+  top: var(--wp-admin--admin-bar--height, 0px);
+  z-index: 5;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 10px 0;
+  background: var(--bg);
+  scrollbar-width: none;
+}
+
+.tafseer-app .r-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.tafseer-app .r-nav a {
+  flex: none;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.tafseer-app .r-nav a:hover {
+  border-color: var(--gold);
+  color: var(--gold-strong);
+}
+
+/* sections */
+
+.tafseer-app .r-section {
+  display: grid;
+  gap: 12px;
+  scroll-margin-top: 60px;
+}
+
+.tafseer-app .r-heading {
+  margin: 8px 0 0;
+  font: 600 21px/1.3 var(--font-title);
+}
+
+.tafseer-app .r-lead {
+  margin: -6px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.tafseer-app .r-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow);
+}
+
+.tafseer-app .r-text {
+  margin: 0 0 10px;
+  font: 17px/1.9 var(--font-read);
+  color: var(--ink);
+}
+
+.tafseer-app .r-text:last-child {
+  margin-bottom: 0;
+}
+
+.tafseer-app .r-sources {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* scenes as a timeline */
+
+.tafseer-app .r-scenes {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 22px;
+  display: grid;
+  gap: 14px;
+  position: relative;
+}
+
+.tafseer-app .r-scenes::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: var(--border);
+}
+
+.tafseer-app .r-scene {
+  position: relative;
+}
+
+.tafseer-app .r-scene::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 24px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--gold);
+}
+
+.tafseer-app .r-scene-no {
+  margin: 0 0 2px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-strong);
+}
+
+.tafseer-app .r-scene-title {
+  margin: 0 0 10px;
+  font: 600 19px/1.5 var(--font-title);
+}
+
+/* symbols */
+
+.tafseer-app .r-symbol-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.tafseer-app .r-num {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  color: var(--gold-strong);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tafseer-app .r-symbol-name {
+  margin: 0;
+  font: 700 21px/1.4 var(--font-title);
+}
+
+.tafseer-app .r-tag {
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.tafseer-app .r-tag--cited {
+  color: var(--gold-strong);
+  border-color: var(--gold);
+  background: var(--gold-soft);
+}
+.tafseer-app .r-tag--general {
+  font-style: italic;
+}
+
+.tafseer-app .r-meaning {
+  padding-inline-start: 14px;
+  border-inline-start: 3px solid var(--gold);
+}
+
+.tafseer-app .r-box {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--teal-soft);
+}
+
+.tafseer-app .r-box-label {
+  margin: 0 0 2px;
+  font: 600 12px/1.5 var(--font-ui);
+  color: var(--teal);
+}
+
+/* analysis */
+
+.tafseer-app .r-meters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.tafseer-app .r-meter-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.tafseer-app .r-meter-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tafseer-app .r-meter-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.tafseer-app .r-meter-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--meter);
+}
+
+.tafseer-app .r-meter--optimism {
+  --meter: var(--teal);
+}
+.tafseer-app .r-meter--hope {
+  --meter: var(--gold);
+}
+.tafseer-app .r-meter--anxiety {
+  --meter: var(--rose);
+}
+
+.tafseer-app .r-analysis-note {
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+/* original texts */
+
+.tafseer-app .r-original {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+}
+
+.tafseer-app .r-original summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.tafseer-app .r-original summary::-webkit-details-marker {
+  display: none;
+}
+
+.tafseer-app .r-original summary::after {
+  content: "▾";
+  margin-inline-start: auto;
+  color: var(--gold);
+  transition: transform 0.15s;
+}
+
+.tafseer-app .r-original[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.tafseer-app .r-original-symbol {
+  font: 700 19px/1.4 var(--font-ar);
+}
+
+.tafseer-app .r-quote {
+  margin: 12px 0 0;
+  padding: 14px 18px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  border-inline-start: 3px solid var(--gold);
+  font: 17px/2 var(--font-ar);
+}
+
+.tafseer-app .r-original-link {
+  margin: 8px 0 0;
+  font-size: 12px;
+  text-align: end;
+}
+
+.tafseer-app .r-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ---------- footer ---------- */
+
+.tafseer-app .t-footer {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 720px) {
+  .tafseer-app .t-sources {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tafseer-app .t-ctx-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tafseer-app .r-meters {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tafseer-app .t-page {
+    padding-top: 22px;
+  }
+  .tafseer-app .t-intro h2 {
+    font-size: 25px;
+  }
+  .tafseer-app .t-step,
+  .tafseer-app .t-form-actions {
+    padding: 18px 16px;
+  }
+  .tafseer-app .t-status:not(:empty) {
+    padding: 0 16px 16px;
+  }
+  .tafseer-app .t-sources {
+    grid-template-columns: 1fr;
+  }
+  .tafseer-app .t-form-actions {
+    flex-direction: column;
+  }
+  .tafseer-app .t-form-actions .t-btn {
+    width: 100%;
+  }
+  .tafseer-app .r-hero {
+    padding: 24px 18px 18px;
+  }
+  .tafseer-app .r-title {
+    font-size: 22px;
+  }
+  .tafseer-app .r-card {
+    padding: 16px;
+  }
+  .tafseer-app .r-sunna {
+    padding: 16px 18px;
+  }
+}
+
+/* ---------- print ---------- */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .tafseer-app,
+  .tafseer-app * {
+    visibility: visible;
+  }
+  .tafseer-app {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+  }
+  .tafseer-app .t-page {
+    padding: 0;
+  }
+  .tafseer-app .r-nav,
+  .tafseer-app .r-actions,
+  .tafseer-app .r-dream .t-btn,
+  .tafseer-app .t-footer {
+    display: none;
+  }
+  .tafseer-app .r-card,
+  .tafseer-app .r-original,
+  .tafseer-app .r-sunna {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+  .tafseer-app .r-original:not([open]) > :not(summary) {
+    display: block;
+  }
+}
