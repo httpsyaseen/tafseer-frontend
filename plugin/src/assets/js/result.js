@@ -4,6 +4,7 @@
   "use strict";
 
   const SOURCE_NAMES = {
+    all: "all the books",
     nabulsi: "Al-Nabulsi",
     ibn_sirin: "Ibn Sirin",
     ibn_shaheen: "Ibn Shahin",
@@ -77,8 +78,11 @@
     return el("p", { class: "r-sources" }, `${prefix}: `, ...parts);
   }
 
+  // Section ids carry the result container's id, so two results on one page don't share anchors.
+  let idPrefix = "";
+
   function section(id, title, lead, ...children) {
-    return el("section", { class: "r-section", id },
+    return el("section", { class: "r-section", id: `${idPrefix}-${id}` },
       el("h2", { class: "r-heading" }, title),
       lead ? el("p", { class: "r-lead" }, lead) : null,
       ...children,
@@ -120,7 +124,7 @@
       hasOriginals ? ["r-originals", "Original texts"] : null,
     ].filter(Boolean);
     return el("nav", { class: "r-nav", "aria-label": "Sections" },
-      ...items.map(([id, label]) => el("a", { href: `#${id}` }, label)),
+      ...items.map(([id, label]) => el("a", { href: `#${idPrefix}-${id}` }, label)),
     );
   }
 
@@ -255,6 +259,7 @@
   }
 
   function renderResult(container, data, dream, onEdit) {
+    idPrefix = container.id;
     const lang = isArabic(dream) ? "ar" : "en";
     const sunna = renderSunna(data, lang);
     const originals = renderOriginals(data);

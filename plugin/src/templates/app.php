@@ -1,53 +1,63 @@
 <?php
 /**
- * Markup for [tafseer_dream]: the form, the loading state and the result container.
+ * Markup for the shortcode: the form, the loading state and the result container.
  * app.js switches between the three; result.js fills the result.
+ *
+ * From the shortcode: $source (fixed authority, or '' for the picker), $api_url, $uid.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="tafseer-app" id="tafseer-app">
+<?php $step = 1; ?>
+<div class="tafseer-app" id="<?php echo esc_attr( $uid ); ?>" data-api-url="<?php echo esc_url( $api_url ); ?>">
 <div class="t-page">
-  <div id="tafseer-form-view">
-    <section class="t-intro">
-      <h2>Tell us your dream</h2>
-      <p>We find its symbols in the classical books, then explain it to you in plain words — with the original passages to check.</p>
-    </section>
-
-    <form class="t-form" id="tafseer-dream-form" novalidate>
+  <div data-t="form-view">
+    <form class="t-form" data-t="form" novalidate>
+      <?php if ( '' !== $source ) : ?>
+        <input type="hidden" name="source" value="<?php echo esc_attr( $source ); ?>">
+      <?php endif; ?>
 
       <!-- 1. Dream -->
       <section class="t-step">
         <div class="t-step-head">
-          <span class="t-step-no">1</span>
+          <span class="t-step-no"><?php echo $step++; ?></span>
           <div>
-            <h2><label for="tafseer-dream">Your dream</label></h2>
+            <h2><label for="<?php echo esc_attr( $uid ); ?>-dream">Your dream</label></h2>
             <p>Write it the way you remember it, in Arabic or English.</p>
           </div>
         </div>
-        <textarea id="tafseer-dream" name="dream" dir="auto" rows="7"
+        <textarea id="<?php echo esc_attr( $uid ); ?>-dream" name="dream" data-t="dream" dir="auto" rows="7"
                   placeholder="رأيت في المنام..." required></textarea>
         <div class="t-field-foot">
           <span class="t-hint">More detail gives a better reading: people, places, colours, how you felt.</span>
-          <span class="t-counter" id="tafseer-counter" aria-live="polite">0</span>
+          <span class="t-counter" data-t="counter" aria-live="polite">0</span>
         </div>
       </section>
 
-      <!-- 2. Authority -->
+      <?php if ( '' === $source ) : ?>
+      <!-- Authority -->
       <section class="t-step">
         <div class="t-step-head">
-          <span class="t-step-no">2</span>
+          <span class="t-step-no"><?php echo $step++; ?></span>
           <div>
-            <h2 id="tafseer-authority-label">Choose an authority</h2>
+            <h2 id="<?php echo esc_attr( $uid ); ?>-authority">Choose an authority</h2>
             <p>The reading follows this interpreter's method and books alone.</p>
           </div>
         </div>
 
-        <div class="t-sources" role="radiogroup" aria-labelledby="tafseer-authority-label">
+        <div class="t-sources" role="radiogroup" aria-labelledby="<?php echo esc_attr( $uid ); ?>-authority">
+          <label class="t-source t-source--all">
+            <input type="radio" name="source" value="all" checked>
+            <span class="t-source-body">
+              <span class="t-source-name">All</span>
+              <span class="t-source-desc">All the classical books together</span>
+            </span>
+          </label>
+
           <label class="t-source">
-            <input type="radio" name="source" value="ibn_sirin" checked>
+            <input type="radio" name="source" value="ibn_sirin">
             <span class="t-source-body">
               <span class="t-source-name">Ibn Sirin</span>
               <span class="t-source-desc">Attributed to Ibn Sirin</span>
@@ -95,11 +105,12 @@ if ( ! defined( 'ABSPATH' ) ) {
           </label>
         </div>
       </section>
+      <?php endif; ?>
 
-      <!-- 3. About you -->
+      <!-- About you -->
       <section class="t-step">
         <div class="t-step-head">
-          <span class="t-step-no">3</span>
+          <span class="t-step-no"><?php echo $step++; ?></span>
           <div>
             <h2>About you <span class="t-optional">optional</span></h2>
             <p>The books read a symbol differently for a man and a woman, the married and the unmarried — so telling us changes the reading.</p>
@@ -108,47 +119,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <div class="t-ctx-grid">
           <label><span>Gender</span>
-            <select id="tafseer-f-jins"><option value="">—</option>
+            <select name="gender"><option value="">—</option>
               <option value="ذكر">Male</option><option value="أنثى">Female</option>
             </select></label>
           <label><span>Marital status</span>
-            <select id="tafseer-f-hala"><option value="">—</option>
+            <select name="marital_status"><option value="">—</option>
               <option value="أعزب">Single</option><option value="متزوج">Married</option><option value="مطلق">Divorced</option><option value="أرمل">Widowed</option>
             </select></label>
           <label><span>Age range</span>
-            <select id="tafseer-f-umr"><option value="">—</option>
+            <select name="age_range"><option value="">—</option>
               <option value="أقل من ٢٠">Under 20</option><option value="٢٠-٣٠">20-30</option><option value="٣٠-٤٠">30-40</option><option value="٤٠-٦٠">40-60</option><option value="أكثر من ٦٠">Over 60</option>
             </select></label>
           <label><span>Waking state</span>
-            <select id="tafseer-f-shuur"><option value="">—</option>
+            <select name="waking_state"><option value="">—</option>
               <option value="مطمئن">At ease</option><option value="قلق">Anxious</option><option value="حزن">Sad</option><option value="خوف">Fearful</option><option value="فرح">Joyful</option>
             </select></label>
           <label><span>Pain in the dream</span>
-            <select id="tafseer-f-alam"><option value="">—</option>
+            <select name="pain"><option value="">—</option>
               <option value="نعم">Yes</option><option value="لا">No</option>
             </select></label>
           <label><span>Recurring</span>
-            <select id="tafseer-f-takrar"><option value="">—</option>
+            <select name="recurring"><option value="">—</option>
               <option value="نعم">Yes</option><option value="نعم، مراراً">Yes, several times</option><option value="لا">No</option>
             </select></label>
           <label><span>Time of the dream</span>
-            <select id="tafseer-f-waqt"><option value="">—</option>
+            <select name="dream_time"><option value="">—</option>
               <option value="أول الليل">Early night</option><option value="آخر الليل">Before dawn</option><option value="بعد الفجر">After fajr</option><option value="القيلولة">Daytime nap</option>
             </select></label>
           <label><span>Istikhara prayer beforehand</span>
-            <select id="tafseer-f-istikhara"><option value="">—</option>
+            <select name="istikhara"><option value="">—</option>
               <option value="نعم">Yes</option><option value="لا">No</option><option value="لم يُذكر">Not mentioned</option>
             </select></label>
           <label><span>Clarity of details</span>
-            <select id="tafseer-f-wuduh"><option value="">—</option>
+            <select name="clarity"><option value="">—</option>
               <option value="واضحة جداً">Very clear</option><option value="متوسطة">Somewhat clear</option><option value="مشوّشة">Hazy</option>
             </select></label>
           <label><span>State before sleep</span>
-            <select id="tafseer-f-qabl"><option value="">—</option>
+            <select name="state_before_sleep"><option value="">—</option>
               <option value="مطمئن">Settled</option><option value="مرهق وكثير التفكير">Exhausted, racing thoughts</option><option value="على وضوء وذكر">In wudu, remembering God</option><option value="بعد خصام أو ضيق">After conflict or distress</option>
             </select></label>
           <label><span>Was the place familiar</span>
-            <select id="tafseer-f-makan"><option value="">—</option>
+            <select name="place_familiar"><option value="">—</option>
               <option value="نعم، مكاني المعتاد">Yes, my own place</option><option value="مكان أعرفه">Somewhere I know</option><option value="مكان غريب">A strange place</option>
             </select></label>
         </div>
@@ -161,28 +172,24 @@ if ( ! defined( 'ABSPATH' ) ) {
         </button>
         <button type="reset" class="t-btn t-btn--ghost">Clear</button>
       </div>
-      <p class="t-status" id="tafseer-status" role="alert"></p>
+      <p class="t-status" data-t="status" role="alert"></p>
     </form>
   </div>
 
   <!-- Loading -->
-  <section class="t-loading" id="tafseer-loading" hidden aria-live="polite">
+  <section class="t-loading" data-t="loading" hidden aria-live="polite">
     <div class="t-loading-moon" aria-hidden="true"></div>
     <h2>Interpreting your dream</h2>
     <p class="t-loading-note">This usually takes 10–20 seconds.</p>
-    <ol class="t-loading-steps" id="tafseer-loading-steps">
+    <ol class="t-loading-steps" data-t="loading-steps">
       <li>Finding the symbols in your dream</li>
-      <li id="tafseer-loading-book">Reading the books</li>
+      <li data-t="loading-book">Reading the books</li>
       <li>Writing your interpretation</li>
     </ol>
   </section>
 
   <!-- Result -->
-  <section class="t-result" id="tafseer-result" hidden></section>
+  <section class="t-result" id="<?php echo esc_attr( $uid ); ?>-result" data-t="result" hidden></section>
 
-  <p class="t-footer">
-    This presents what the classical books say. It is not a fatwa, a ruling, or knowledge of the unseen.
-    Interpretation is probabilistic and varies with the dreamer's situation.
-  </p>
 </div>
 </div>

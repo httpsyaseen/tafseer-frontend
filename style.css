@@ -263,6 +263,10 @@ select:focus {
   gap: 10px;
 }
 
+.source--all {
+  grid-column: 1 / -1;
+}
+
 .source {
   position: relative;
   cursor: pointer;

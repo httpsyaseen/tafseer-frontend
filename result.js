@@ -1,6 +1,7 @@
 // Renders the /api/dreams response. All text goes in via textContent, never innerHTML.
 
 const SOURCE_NAMES = {
+  all: "all the books",
   nabulsi: "Al-Nabulsi",
   ibn_sirin: "Ibn Sirin",
   ibn_shaheen: "Ibn Shahin",

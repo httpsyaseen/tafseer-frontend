@@ -52,8 +52,6 @@
 
 .tafseer-app {
   margin: 0 auto;
-  background: var(--bg);
-  border-radius: var(--radius);
   color: var(--ink);
   font: 15px/1.6 var(--font-ui);
   text-align: start;
@@ -130,23 +128,6 @@
 .tafseer-app .t-page {
   max-width: 820px;
   margin: 0 auto;
-  padding: 32px 16px 48px;
-}
-
-.tafseer-app .t-intro {
-  margin-bottom: 24px;
-}
-
-.tafseer-app .t-intro h2 {
-  margin: 0 0 6px;
-  font: 600 30px/1.25 var(--font-title);
-  letter-spacing: -0.01em;
-}
-
-.tafseer-app .t-intro p {
-  margin: 0;
-  color: var(--muted);
-  max-width: 600px;
 }
 
 /* ---------- form ---------- */
@@ -257,6 +238,10 @@
 .tafseer-app .t-source {
   position: relative;
   cursor: pointer;
+}
+
+.tafseer-app .t-source--all {
+  grid-column: 1 / -1;
 }
 
 .tafseer-app .t-source input {
@@ -735,7 +720,7 @@
   gap: 6px;
   overflow-x: auto;
   padding: 10px 0;
-  background: var(--bg);
+  background: var(--surface);
   scrollbar-width: none;
 }
 
@@ -1034,18 +1019,6 @@
   flex-wrap: wrap;
 }
 
-/* ---------- footer ---------- */
-
-.tafseer-app .t-footer {
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 24px 16px 40px;
-  border-top: 1px solid var(--border);
-  font-size: 12px;
-  color: var(--muted);
-  text-align: center;
-}
-
 /* ---------- responsive ---------- */
 
 @media (max-width: 720px) {
@@ -1062,12 +1035,6 @@
 }
 
 @media (max-width: 480px) {
-  .tafseer-app .t-page {
-    padding-top: 22px;
-  }
-  .tafseer-app .t-intro h2 {
-    font-size: 25px;
-  }
   .tafseer-app .t-step,
   .tafseer-app .t-form-actions {
     padding: 18px 16px;
@@ -1115,13 +1082,9 @@
     right: 0;
     background: #fff;
   }
-  .tafseer-app .t-page {
-    padding: 0;
-  }
   .tafseer-app .r-nav,
   .tafseer-app .r-actions,
-  .tafseer-app .r-dream .t-btn,
-  .tafseer-app .t-footer {
+  .tafseer-app .r-dream .t-btn {
     display: none;
   }
   .tafseer-app .r-card,
