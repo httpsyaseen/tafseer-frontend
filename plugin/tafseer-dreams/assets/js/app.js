@@ -1,12 +1,12 @@
 // The form for the Tafseer shortcodes. Posts to the plugin's REST route, which forwards to the backend.
-// Every .tafseer-app on the page is its own instance; several Tafseer plugins may share one page.
+// Every .tafseer-app on the page is its own instance; several shortcodes may share one page.
 (function () {
   "use strict";
 
   const { render: renderResult, SOURCE_NAMES } = window.TafseerResult;
 
   function init(root) {
-    // With several Tafseer plugins active this file can load more than once.
+    // Guards against this file loading twice (e.g. an optimisation plugin duplicating it).
     if (root.dataset.ready) return;
     root.dataset.ready = "1";
 
