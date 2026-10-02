@@ -3,7 +3,7 @@
  * Markup for the shortcode: the form, the loading state and the result container.
  * app.js switches between the three; result.js fills the result.
  *
- * From the shortcode: $source (fixed authority, or '' for the picker), $api_url, $uid.
+ * From the shortcode: $source (fixed authority, or '' for the picker), $api_url, $my_dreams, $uid.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <?php $step = 1; ?>
-<div class="tafseer-app" id="<?php echo esc_attr( $uid ); ?>" data-api-url="<?php echo esc_url( $api_url ); ?>">
+<div class="tafseer-app" dir="rtl" lang="ar" id="<?php echo esc_attr( $uid ); ?>" data-api-url="<?php echo esc_url( $api_url ); ?>" data-my-dreams-url="<?php echo esc_url( $my_dreams ); ?>">
 <div class="t-page">
   <div data-t="form-view">
     <form class="t-form" data-t="form" novalidate>
@@ -24,14 +24,14 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="t-step-head">
           <span class="t-step-no"><?php echo $step++; ?></span>
           <div>
-            <h2><label for="<?php echo esc_attr( $uid ); ?>-dream">Your dream</label></h2>
-            <p>Write it the way you remember it, in Arabic or English.</p>
+            <h2><label for="<?php echo esc_attr( $uid ); ?>-dream">رؤياك</label></h2>
+            <p>اكتبها كما تتذكرها، بالعربية أو بالإنجليزية.</p>
           </div>
         </div>
         <textarea id="<?php echo esc_attr( $uid ); ?>-dream" name="dream" data-t="dream" dir="auto" rows="7"
                   placeholder="رأيت في المنام..." required></textarea>
         <div class="t-field-foot">
-          <span class="t-hint">More detail gives a better reading: people, places, colours, how you felt.</span>
+          <span class="t-hint">كلما زادت التفاصيل كان التفسير أدق: الأشخاص، والأماكن، والألوان، وما شعرت به.</span>
           <span class="t-counter" data-t="counter" aria-live="polite">0</span>
         </div>
       </section>
@@ -42,8 +42,8 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="t-step-head">
           <span class="t-step-no"><?php echo $step++; ?></span>
           <div>
-            <h2 id="<?php echo esc_attr( $uid ); ?>-authority">Choose an authority</h2>
-            <p>The reading follows this interpreter's method and books alone.</p>
+            <h2 id="<?php echo esc_attr( $uid ); ?>-authority">اختر المفسّر</h2>
+            <p>يتبع التفسير منهج هذا المفسّر وكتبه وحدها.</p>
           </div>
         </div>
 
@@ -51,56 +51,56 @@ if ( ! defined( 'ABSPATH' ) ) {
           <label class="t-source t-source--all">
             <input type="radio" name="source" value="all" checked>
             <span class="t-source-body">
-              <span class="t-source-name">All</span>
-              <span class="t-source-desc">All the classical books together</span>
+              <span class="t-source-name">الكل</span>
+              <span class="t-source-desc">جميع كتب التفسير معاً</span>
             </span>
           </label>
 
           <label class="t-source">
             <input type="radio" name="source" value="ibn_sirin">
             <span class="t-source-body">
-              <span class="t-source-name">Ibn Sirin</span>
-              <span class="t-source-desc">Attributed to Ibn Sirin</span>
+              <span class="t-source-name">ابن سيرين</span>
+              <span class="t-source-desc">المنسوب إلى ابن سيرين</span>
             </span>
           </label>
 
           <label class="t-source">
             <input type="radio" name="source" value="nabulsi">
             <span class="t-source-body">
-              <span class="t-source-name">Al-Nabulsi</span>
-              <span class="t-source-desc">Abd al-Ghani al-Nabulsi</span>
+              <span class="t-source-name">النابلسي</span>
+              <span class="t-source-desc">عبد الغني النابلسي</span>
             </span>
           </label>
 
           <label class="t-source">
             <input type="radio" name="source" value="ibn_shaheen">
             <span class="t-source-body">
-              <span class="t-source-name">Ibn Shahin</span>
-              <span class="t-source-desc">Ibn Shahin al-Zahiri</span>
+              <span class="t-source-name">ابن شاهين</span>
+              <span class="t-source-desc">ابن شاهين الظاهري</span>
             </span>
           </label>
 
           <label class="t-source">
             <input type="radio" name="source" value="tabir">
             <span class="t-source-body">
-              <span class="t-source-name">Ta'bir al-Ru'ya</span>
-              <span class="t-source-desc">The classical book of that name</span>
+              <span class="t-source-name">تعبير الرؤيا</span>
+              <span class="t-source-desc">الكتاب التراثي المعروف بهذا الاسم</span>
             </span>
           </label>
 
           <label class="t-source">
             <input type="radio" name="source" value="sadiq">
             <span class="t-source-body">
-              <span class="t-source-name">Imam Al-Sadiq</span>
-              <span class="t-source-desc">Attributed to Imam Ja'far al-Sadiq and the Ahl al-Bayt</span>
+              <span class="t-source-name">الإمام الصادق</span>
+              <span class="t-source-desc">المنسوب إلى الإمام جعفر الصادق وأهل البيت</span>
             </span>
           </label>
 
           <label class="t-source t-source--alt">
             <input type="radio" name="source" value="freud">
             <span class="t-source-body">
-              <span class="t-source-name">Sigmund Freud <span class="t-source-flag">psychological</span></span>
-              <span class="t-source-desc">An alternative, non-religious lens</span>
+              <span class="t-source-name">سيغموند فرويد <span class="t-source-flag">نفسي</span></span>
+              <span class="t-source-desc">منظور بديل غير ديني</span>
             </span>
           </label>
         </div>
@@ -112,65 +112,65 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="t-step-head">
           <span class="t-step-no"><?php echo $step++; ?></span>
           <div>
-            <h2>About you <span class="t-optional">optional</span></h2>
-            <p>The books read a symbol differently for a man and a woman, the married and the unmarried — so telling us changes the reading.</p>
+            <h2>عنك <span class="t-optional">اختياري</span></h2>
+            <p>تختلف دلالة الرمز في الكتب بين الرجل والمرأة، والمتزوج والأعزب — لذلك تُغيّر إجاباتك التفسير.</p>
           </div>
         </div>
 
         <div class="t-ctx-grid">
-          <label><span>Gender</span>
+          <label><span>الجنس</span>
             <select name="gender"><option value="">—</option>
-              <option value="ذكر">Male</option><option value="أنثى">Female</option>
+              <option value="ذكر">ذكر</option><option value="أنثى">أنثى</option>
             </select></label>
-          <label><span>Marital status</span>
+          <label><span>الحالة الاجتماعية</span>
             <select name="marital_status"><option value="">—</option>
-              <option value="أعزب">Single</option><option value="متزوج">Married</option><option value="مطلق">Divorced</option><option value="أرمل">Widowed</option>
+              <option value="أعزب">أعزب</option><option value="متزوج">متزوج</option><option value="مطلق">مطلق</option><option value="أرمل">أرمل</option>
             </select></label>
-          <label><span>Age range</span>
+          <label><span>الفئة العمرية</span>
             <select name="age_range"><option value="">—</option>
-              <option value="أقل من ٢٠">Under 20</option><option value="٢٠-٣٠">20-30</option><option value="٣٠-٤٠">30-40</option><option value="٤٠-٦٠">40-60</option><option value="أكثر من ٦٠">Over 60</option>
+              <option value="أقل من ٢٠">أقل من ٢٠</option><option value="٢٠-٣٠">٢٠-٣٠</option><option value="٣٠-٤٠">٣٠-٤٠</option><option value="٤٠-٦٠">٤٠-٦٠</option><option value="أكثر من ٦٠">أكثر من ٦٠</option>
             </select></label>
-          <label><span>Waking state</span>
+          <label><span>الحالة عند الاستيقاظ</span>
             <select name="waking_state"><option value="">—</option>
-              <option value="مطمئن">At ease</option><option value="قلق">Anxious</option><option value="حزن">Sad</option><option value="خوف">Fearful</option><option value="فرح">Joyful</option>
+              <option value="مطمئن">مطمئن</option><option value="قلق">قلق</option><option value="حزن">حزن</option><option value="خوف">خوف</option><option value="فرح">فرح</option>
             </select></label>
-          <label><span>Pain in the dream</span>
+          <label><span>ألم في المنام</span>
             <select name="pain"><option value="">—</option>
-              <option value="نعم">Yes</option><option value="لا">No</option>
+              <option value="نعم">نعم</option><option value="لا">لا</option>
             </select></label>
-          <label><span>Recurring</span>
+          <label><span>هل تكررت الرؤيا</span>
             <select name="recurring"><option value="">—</option>
-              <option value="نعم">Yes</option><option value="نعم، مراراً">Yes, several times</option><option value="لا">No</option>
+              <option value="نعم">نعم</option><option value="نعم، مراراً">نعم، مراراً</option><option value="لا">لا</option>
             </select></label>
-          <label><span>Time of the dream</span>
+          <label><span>وقت الرؤيا</span>
             <select name="dream_time"><option value="">—</option>
-              <option value="أول الليل">Early night</option><option value="آخر الليل">Before dawn</option><option value="بعد الفجر">After fajr</option><option value="القيلولة">Daytime nap</option>
+              <option value="أول الليل">أول الليل</option><option value="آخر الليل">آخر الليل</option><option value="بعد الفجر">بعد الفجر</option><option value="القيلولة">القيلولة</option>
             </select></label>
-          <label><span>Istikhara prayer beforehand</span>
+          <label><span>صلاة الاستخارة قبلها</span>
             <select name="istikhara"><option value="">—</option>
-              <option value="نعم">Yes</option><option value="لا">No</option><option value="لم يُذكر">Not mentioned</option>
+              <option value="نعم">نعم</option><option value="لا">لا</option><option value="لم يُذكر">لم يُذكر</option>
             </select></label>
-          <label><span>Clarity of details</span>
+          <label><span>وضوح التفاصيل</span>
             <select name="clarity"><option value="">—</option>
-              <option value="واضحة جداً">Very clear</option><option value="متوسطة">Somewhat clear</option><option value="مشوّشة">Hazy</option>
+              <option value="واضحة جداً">واضحة جداً</option><option value="متوسطة">متوسطة</option><option value="مشوّشة">مشوّشة</option>
             </select></label>
-          <label><span>State before sleep</span>
+          <label><span>الحالة قبل النوم</span>
             <select name="state_before_sleep"><option value="">—</option>
-              <option value="مطمئن">Settled</option><option value="مرهق وكثير التفكير">Exhausted, racing thoughts</option><option value="على وضوء وذكر">In wudu, remembering God</option><option value="بعد خصام أو ضيق">After conflict or distress</option>
+              <option value="مطمئن">مطمئن</option><option value="مرهق وكثير التفكير">مرهق وكثير التفكير</option><option value="على وضوء وذكر">على وضوء وذكر</option><option value="بعد خصام أو ضيق">بعد خصام أو ضيق</option>
             </select></label>
-          <label><span>Was the place familiar</span>
+          <label><span>هل المكان مألوف</span>
             <select name="place_familiar"><option value="">—</option>
-              <option value="نعم، مكاني المعتاد">Yes, my own place</option><option value="مكان أعرفه">Somewhere I know</option><option value="مكان غريب">A strange place</option>
+              <option value="نعم، مكاني المعتاد">نعم، مكاني المعتاد</option><option value="مكان أعرفه">مكان أعرفه</option><option value="مكان غريب">مكان غريب</option>
             </select></label>
         </div>
       </section>
 
       <div class="t-form-actions">
         <button type="submit" class="t-btn t-btn--primary t-btn--lg">
-          Interpret my dream
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          فسّر رؤياي
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button type="reset" class="t-btn t-btn--ghost">Clear</button>
+        <button type="reset" class="t-btn t-btn--ghost">مسح</button>
       </div>
       <p class="t-status" data-t="status" role="alert"></p>
     </form>
@@ -179,12 +179,12 @@ if ( ! defined( 'ABSPATH' ) ) {
   <!-- Loading -->
   <section class="t-loading" data-t="loading" hidden aria-live="polite">
     <div class="t-loading-moon" aria-hidden="true"></div>
-    <h2>Interpreting your dream</h2>
-    <p class="t-loading-note">This usually takes 10–20 seconds.</p>
+    <h2>جارٍ تفسير رؤياك</h2>
+    <p class="t-loading-note">يستغرق ذلك عادةً من ١٠ إلى ٢٠ ثانية.</p>
     <ol class="t-loading-steps" data-t="loading-steps">
-      <li>Finding the symbols in your dream</li>
-      <li data-t="loading-book">Reading the books</li>
-      <li>Writing your interpretation</li>
+      <li>البحث عن رموز رؤياك</li>
+      <li data-t="loading-book">الرجوع إلى الكتب</li>
+      <li>كتابة التفسير</li>
     </ol>
   </section>
 

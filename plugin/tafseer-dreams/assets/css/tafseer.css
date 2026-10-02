@@ -33,9 +33,9 @@
   --shadow: 0 1px 2px rgba(29, 34, 51, 0.05), 0 6px 20px rgba(29, 34, 51, 0.06);
   --focus: 0 0 0 3px color-mix(in srgb, var(--gold) 35%, transparent);
 
-  --font-ui: "Inter", system-ui, -apple-system, sans-serif;
-  --font-read: "Lora", "Noto Naskh Arabic", Georgia, serif;
-  --font-title: "Lora", "Amiri", Georgia, serif;
+  --font-ui: "Noto Naskh Arabic", "Inter", system-ui, -apple-system, sans-serif;
+  --font-read: "Noto Naskh Arabic", "Lora", Georgia, serif;
+  --font-title: "Amiri", "Lora", Georgia, serif;
   --font-ar: "Noto Naskh Arabic", "Amiri", serif;
 }
 
@@ -86,6 +86,7 @@
   font-style: normal;
   border-top: 0;
   border-bottom: 0;
+  border-left: 0;
   border-right: 0;
   box-shadow: none;
 }
@@ -255,7 +256,8 @@
   flex-direction: column;
   gap: 3px;
   height: 100%;
-  padding: 12px 14px 12px 38px;
+  padding-block: 12px;
+  padding-inline: 38px 14px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -270,7 +272,7 @@
 .tafseer-app .t-source-body::before {
   content: "";
   position: absolute;
-  left: 14px;
+  inset-inline-start: 14px;
   top: 15px;
   width: 14px;
   height: 14px;
@@ -326,8 +328,6 @@
   font-size: 10px;
   font-weight: 500;
   color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 /* context selects */
@@ -357,10 +357,11 @@
 .tafseer-app select {
   width: 100%;
   appearance: none;
-  padding: 9px 32px 9px 11px;
+  padding-block: 9px;
+  padding-inline: 11px 32px;
   background: var(--surface)
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23b3833a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
-    no-repeat right 11px center;
+    no-repeat left 11px center;
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--ink);
@@ -798,7 +799,8 @@
 .tafseer-app .r-scenes {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 22px;
+  padding: 0;
+  padding-inline-start: 22px;
   display: grid;
   gap: 14px;
   position: relative;
@@ -807,7 +809,7 @@
 .tafseer-app .r-scenes::before {
   content: "";
   position: absolute;
-  left: 6px;
+  inset-inline-start: 6px;
   top: 12px;
   bottom: 12px;
   width: 2px;
@@ -821,7 +823,7 @@
 .tafseer-app .r-scene::before {
   content: "";
   position: absolute;
-  left: -22px;
+  inset-inline-start: -22px;
   top: 24px;
   width: 14px;
   height: 14px;
@@ -834,8 +836,6 @@
   margin: 0 0 2px;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   color: var(--gold-strong);
 }
 
@@ -1019,6 +1019,105 @@
   flex-wrap: wrap;
 }
 
+/* ---------- my dreams ---------- */
+
+.tafseer-app .h-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.tafseer-app .h-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0;
+}
+
+/* The whole card opens the dream; themes style bare buttons, so undo that here. */
+.tafseer-app .h-open {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 18px 22px;
+  background: none;
+  border: 0;
+  border-radius: var(--radius);
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.tafseer-app .h-open:hover .h-title {
+  color: var(--gold-strong);
+}
+
+.tafseer-app .h-open:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+.tafseer-app .h-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.tafseer-app .h-title {
+  font: 600 18px/1.5 var(--font-title);
+  transition: color 0.15s;
+}
+
+.tafseer-app .h-dream {
+  font-size: 14px;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.tafseer-app .h-delete {
+  margin: 0;
+  margin-block-start: 16px;
+  margin-inline-end: 16px;
+  flex-shrink: 0;
+}
+
+.tafseer-app .h-empty {
+  margin: 0;
+  padding: 32px 20px;
+  background: var(--surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+  text-align: center;
+}
+
+.tafseer-app .h-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.tafseer-app .h-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.tafseer-app .h-back {
+  margin-bottom: 16px;
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 720px) {
@@ -1060,6 +1159,12 @@
   .tafseer-app .r-card {
     padding: 16px;
   }
+  .tafseer-app .h-item {
+    padding: 0;
+  }
+  .tafseer-app .h-open {
+    padding: 16px;
+  }
   .tafseer-app .r-sunna {
     padding: 16px 18px;
   }
@@ -1084,6 +1189,7 @@
   }
   .tafseer-app .r-nav,
   .tafseer-app .r-actions,
+  .tafseer-app .h-back,
   .tafseer-app .r-dream .t-btn {
     display: none;
   }

@@ -30,6 +30,10 @@ const FIELDS = {
   "f-makan": "place_familiar",
 };
 
+// Only Arabic error messages are shown as they are; anything else gets the general one.
+const GENERIC_ERROR = "تعذّر تفسير الرؤيا الآن. حاول مرة أخرى بعد قليل.";
+const isArabic = (text) => /[\u0600-\u06FF]/.test(text || "");
+
 function setStatus(text) {
   status.textContent = text;
 }
@@ -44,7 +48,7 @@ function show(view) {
 // The request is one call, so the steps are paced by time, not by real progress.
 let stepTimer = null;
 function startLoading(sourceName) {
-  loadingBook.textContent = `Reading ${sourceName}`;
+  loadingBook.textContent = `الرجوع إلى ${sourceName}`;
   let i = 0;
   const mark = () => loadingSteps.forEach((li, n) => {
     li.classList.toggle("is-done", n < i);
@@ -61,6 +65,20 @@ function stopLoading() {
   clearInterval(stepTimer);
 }
 
+// Back to the form exactly as the visitor left it: dream, authority and "about you".
+function editDream() {
+  show("form");
+  dreamInput.focus({ preventScroll: true });
+}
+
+// A new dream from the same person: only the dream text is cleared.
+function newDream() {
+  dreamInput.value = "";
+  counter.textContent = "0";
+  setStatus("");
+  editDream();
+}
+
 dreamInput.addEventListener("input", () => {
   counter.textContent = dreamInput.value.trim().length;
 });
@@ -70,7 +88,7 @@ form.addEventListener("submit", async (e) => {
 
   const dream = dreamInput.value.trim();
   if (!dream) {
-    setStatus("Please write your dream first.");
+    setStatus("اكتب رؤياك أولاً من فضلك.");
     dreamInput.focus();
     return;
   }
@@ -84,7 +102,7 @@ form.addEventListener("submit", async (e) => {
 
   setStatus("");
   submitBtn.disabled = true;
-  startLoading(SOURCE_NAMES[body.source] || "the books");
+  startLoading(SOURCE_NAMES[body.source] || "الكتب");
   try {
     const res = await fetch(API_URL, {
       method: "POST",
@@ -92,12 +110,12 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify(body),
     });
     const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(typeof data.detail === "string" ? data.detail : `HTTP ${res.status}`);
-    renderResult(result, data, dream, () => show("form"));
+    if (!res.ok) throw new Error(typeof data.detail === "string" ? data.detail : "");
+    renderResult(result, data, dream, { onEdit: editDream, onNew: newDream });
     show("result");
   } catch (err) {
     show("form");
-    setStatus(`Something went wrong: ${err.message}. Please try again.`);
+    setStatus(isArabic(err.message) ? err.message : GENERIC_ERROR);
   } finally {
     stopLoading();
     submitBtn.disabled = false;

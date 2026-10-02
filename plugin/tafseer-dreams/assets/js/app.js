@@ -5,6 +5,10 @@
 
   const { render: renderResult, SOURCE_NAMES } = window.TafseerResult;
 
+  // Only Arabic error messages are shown as they are; anything else gets the general one.
+  const GENERIC_ERROR = "تعذّر تفسير الرؤيا الآن. حاول مرة أخرى بعد قليل.";
+  const isArabic = (text) => /[\u0600-\u06FF]/.test(text || "");
+
   function init(root) {
     // Guards against this file loading twice (e.g. an optimisation plugin duplicating it).
     if (root.dataset.ready) return;
@@ -12,6 +16,7 @@
 
     const $ = (name) => root.querySelector(`[data-t="${name}"]`);
     const apiUrl = root.dataset.apiUrl;
+    const myDreamsUrl = root.dataset.myDreamsUrl || "";
     const formView = $("form-view");
     const form = $("form");
     const dreamInput = $("dream");
@@ -40,7 +45,7 @@
     // The request is one call, so the steps are paced by time, not by real progress.
     let stepTimer = null;
     function startLoading(sourceName) {
-      loadingBook.textContent = `Reading ${sourceName}`;
+      loadingBook.textContent = `الرجوع إلى ${sourceName}`;
       let i = 0;
       const mark = () => loadingSteps.forEach((li, n) => {
         li.classList.toggle("is-done", n < i);
@@ -57,6 +62,20 @@
       clearInterval(stepTimer);
     }
 
+    // Back to the form exactly as the visitor left it: dream, authority and "about you".
+    function editDream() {
+      show("form");
+      dreamInput.focus({ preventScroll: true });
+    }
+
+    // A new dream from the same person: only the dream text is cleared.
+    function newDream() {
+      dreamInput.value = "";
+      counter.textContent = "0";
+      setStatus("");
+      editDream();
+    }
+
     dreamInput.addEventListener("input", () => {
       counter.textContent = dreamInput.value.trim().length;
     });
@@ -66,7 +85,7 @@
 
       const dream = dreamInput.value.trim();
       if (!dream) {
-        setStatus("Please write your dream first.");
+        setStatus("اكتب رؤياك أولاً من فضلك.");
         dreamInput.focus();
         return;
       }
@@ -80,7 +99,7 @@
 
       setStatus("");
       submitBtn.disabled = true;
-      startLoading(SOURCE_NAMES[body.source] || "the books");
+      startLoading(SOURCE_NAMES[body.source] || "الكتب");
       try {
         const res = await fetch(apiUrl, {
           method: "POST",
@@ -90,14 +109,15 @@
         const data = await res.json().catch(() => ({}));
         if (!res.ok) {
           // `detail` from the backend and the plugin; `message` from WordPress's own REST errors.
-          const reason = typeof data.detail === "string" ? data.detail : data.message;
-          throw new Error(reason || `HTTP ${res.status}`);
+          throw new Error(typeof data.detail === "string" ? data.detail : data.message);
         }
-        renderResult(result, data, dream, () => show("form"));
+        renderResult(result, data, dream, { onEdit: editDream, onNew: newDream, myDreamsUrl });
+        // Kept in this browser for [tafseer_my_dreams]. A storage failure never blocks the result.
+        try { window.TafseerStore.save(body, data); } catch { /* storage unavailable */ }
         show("result");
       } catch (err) {
         show("form");
-        setStatus(`Something went wrong: ${err.message}. Please try again.`);
+        setStatus(isArabic(err.message) ? err.message : GENERIC_ERROR);
       } finally {
         stopLoading();
         submitBtn.disabled = false;

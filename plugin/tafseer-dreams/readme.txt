@@ -1,7 +1,7 @@
 === Tafseer Dream Interpretation ===
 Requires at least: 5.8
 Requires PHP: 7.4
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv2 or later
 
 Dream interpretation grounded in the classical books of Ibn Sirin, Al-Nabulsi and others.
@@ -26,6 +26,17 @@ Dream interpretation grounded in the classical books of Ibn Sirin, Al-Nabulsi an
 
 Several shortcodes can share one page.
 
+[tafseer_my_dreams]   The visitor's saved dreams ("My dreams")
+
+Every interpreted dream is saved in the visitor's own browser (localStorage), newest first,
+up to 100. Put [tafseer_my_dreams] on its own page to list them; a saved dream opens again
+without asking the backend. Nothing is stored on the server, so the list is per browser and
+per device, and is lost if the visitor clears their browser data.
+
+The result page links to the "My dreams" page by itself once a published page or post contains
+[tafseer_my_dreams]. With a page builder that hides the shortcode from WordPress, give the
+address yourself: [tafseer_dream my_dreams="/my-dreams/"] (works on every form shortcode).
+
 == How it works ==
 
 The form and the result are both shown by the shortcode: after submitting, the result
@@ -41,6 +52,11 @@ to the backend and returns the answer. The backend address is never exposed to v
 * If a caching or security plugin blocks or caches the REST API, exclude /wp-json/tafseer/.
 
 == Changelog ==
+
+= 2.2.0 =
+* Arabic interface, right to left.
+* [tafseer_my_dreams]: the visitor's past dreams, saved in their browser.
+* "Edit dream" keeps the form as it was; "New dream" keeps the "about you" answers.
 
 = 2.1.0 =
 * One plugin with a shortcode per authority, plus [tafseer_dream] with every authority.

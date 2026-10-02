@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tafseer — Dream Interpretation</title>
-  <meta name="description" content="Dream interpretation grounded in the classical books of Ibn Sirin, Al-Nabulsi and others.">
+  <title>تفسير — تفسير الأحلام</title>
+  <meta name="description" content="تفسير الأحلام استناداً إلى كتب ابن سيرين والنابلسي وغيرهما من كتب التراث.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,9 +18,9 @@
           <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" fill="currentColor"/>
           <path d="M17 3.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z" fill="currentColor"/>
         </svg>
-        Tafseer
+        تفسير
       </a>
-      <span class="tagline">Dream interpretation from the classical books</span>
+      <span class="tagline">تفسير الأحلام من كتب التراث</span>
     </div>
   </header>
 
@@ -28,8 +28,8 @@
 
     <div id="form-view">
       <section class="intro">
-        <h1>Tell us your dream</h1>
-        <p>We find its symbols in the classical books, then explain it to you in plain words — with the original passages to check.</p>
+        <h1>احكِ لنا رؤياك</h1>
+        <p>نبحث عن رموز رؤياك في كتب التفسير، ثم نشرحها لك بلغة واضحة — مع النصوص الأصلية لتتحقق منها.</p>
       </section>
 
       <form class="form" id="dream-form" novalidate>
@@ -39,14 +39,14 @@
           <div class="step-head">
             <span class="step-no">1</span>
             <div>
-              <h2><label for="dream">Your dream</label></h2>
-              <p>Write it the way you remember it, in Arabic or English.</p>
+              <h2><label for="dream">رؤياك</label></h2>
+              <p>اكتبها كما تتذكرها، بالعربية أو بالإنجليزية.</p>
             </div>
           </div>
           <textarea id="dream" name="dream" dir="auto" rows="7"
                     placeholder="رأيت في المنام..." required></textarea>
           <div class="field-foot">
-            <span class="hint">More detail gives a better reading: people, places, colours, how you felt.</span>
+            <span class="hint">كلما زادت التفاصيل كان التفسير أدق: الأشخاص، والأماكن، والألوان، وما شعرت به.</span>
             <span class="counter" id="counter" aria-live="polite">0</span>
           </div>
         </section>
@@ -56,8 +56,8 @@
           <div class="step-head">
             <span class="step-no">2</span>
             <div>
-              <h2 id="authority-label">Choose an authority</h2>
-              <p>The reading follows this interpreter's method and books alone.</p>
+              <h2 id="authority-label">اختر المفسّر</h2>
+              <p>يتبع التفسير منهج هذا المفسّر وكتبه وحدها.</p>
             </div>
           </div>
 
@@ -65,56 +65,56 @@
             <label class="source source--all">
               <input type="radio" name="source" value="all">
               <span class="source-body">
-                <span class="source-name">All</span>
-                <span class="source-desc">All the classical books together</span>
+                <span class="source-name">الكل</span>
+                <span class="source-desc">جميع كتب التفسير معاً</span>
               </span>
             </label>
 
             <label class="source">
               <input type="radio" name="source" value="ibn_sirin" checked>
               <span class="source-body">
-                <span class="source-name">Ibn Sirin</span>
-                <span class="source-desc">Attributed to Ibn Sirin</span>
+                <span class="source-name">ابن سيرين</span>
+                <span class="source-desc">المنسوب إلى ابن سيرين</span>
               </span>
             </label>
 
             <label class="source">
               <input type="radio" name="source" value="nabulsi">
               <span class="source-body">
-                <span class="source-name">Al-Nabulsi</span>
-                <span class="source-desc">Abd al-Ghani al-Nabulsi</span>
+                <span class="source-name">النابلسي</span>
+                <span class="source-desc">عبد الغني النابلسي</span>
               </span>
             </label>
 
             <label class="source">
               <input type="radio" name="source" value="ibn_shaheen">
               <span class="source-body">
-                <span class="source-name">Ibn Shahin</span>
-                <span class="source-desc">Ibn Shahin al-Zahiri</span>
+                <span class="source-name">ابن شاهين</span>
+                <span class="source-desc">ابن شاهين الظاهري</span>
               </span>
             </label>
 
             <label class="source">
               <input type="radio" name="source" value="tabir">
               <span class="source-body">
-                <span class="source-name">Ta'bir al-Ru'ya</span>
-                <span class="source-desc">The classical book of that name</span>
+                <span class="source-name">تعبير الرؤيا</span>
+                <span class="source-desc">الكتاب التراثي المعروف بهذا الاسم</span>
               </span>
             </label>
 
             <label class="source">
               <input type="radio" name="source" value="sadiq">
               <span class="source-body">
-                <span class="source-name">Imam Al-Sadiq</span>
-                <span class="source-desc">Attributed to Imam Ja'far al-Sadiq and the Ahl al-Bayt</span>
+                <span class="source-name">الإمام الصادق</span>
+                <span class="source-desc">المنسوب إلى الإمام جعفر الصادق وأهل البيت</span>
               </span>
             </label>
 
             <label class="source source--alt">
               <input type="radio" name="source" value="freud">
               <span class="source-body">
-                <span class="source-name">Sigmund Freud <span class="source-flag">psychological</span></span>
-                <span class="source-desc">An alternative, non-religious lens</span>
+                <span class="source-name">سيغموند فرويد <span class="source-flag">نفسي</span></span>
+                <span class="source-desc">منظور بديل غير ديني</span>
               </span>
             </label>
           </div>
@@ -125,65 +125,65 @@
           <div class="step-head">
             <span class="step-no">3</span>
             <div>
-              <h2>About you <span class="optional">optional</span></h2>
-              <p>The books read a symbol differently for a man and a woman, the married and the unmarried — so telling us changes the reading.</p>
+              <h2>عنك <span class="optional">اختياري</span></h2>
+              <p>تختلف دلالة الرمز في الكتب بين الرجل والمرأة، والمتزوج والأعزب — لذلك تُغيّر إجاباتك التفسير.</p>
             </div>
           </div>
 
           <div class="ctx-grid">
-            <label><span>Gender</span>
+            <label><span>الجنس</span>
               <select id="f-jins"><option value="">—</option>
-                <option value="ذكر">Male</option><option value="أنثى">Female</option>
+                <option value="ذكر">ذكر</option><option value="أنثى">أنثى</option>
               </select></label>
-            <label><span>Marital status</span>
+            <label><span>الحالة الاجتماعية</span>
               <select id="f-hala"><option value="">—</option>
-                <option value="أعزب">Single</option><option value="متزوج">Married</option><option value="مطلق">Divorced</option><option value="أرمل">Widowed</option>
+                <option value="أعزب">أعزب</option><option value="متزوج">متزوج</option><option value="مطلق">مطلق</option><option value="أرمل">أرمل</option>
               </select></label>
-            <label><span>Age range</span>
+            <label><span>الفئة العمرية</span>
               <select id="f-umr"><option value="">—</option>
-                <option value="أقل من ٢٠">Under 20</option><option value="٢٠-٣٠">20-30</option><option value="٣٠-٤٠">30-40</option><option value="٤٠-٦٠">40-60</option><option value="أكثر من ٦٠">Over 60</option>
+                <option value="أقل من ٢٠">أقل من ٢٠</option><option value="٢٠-٣٠">٢٠-٣٠</option><option value="٣٠-٤٠">٣٠-٤٠</option><option value="٤٠-٦٠">٤٠-٦٠</option><option value="أكثر من ٦٠">أكثر من ٦٠</option>
               </select></label>
-            <label><span>Waking state</span>
+            <label><span>الحالة عند الاستيقاظ</span>
               <select id="f-shuur"><option value="">—</option>
-                <option value="مطمئن">At ease</option><option value="قلق">Anxious</option><option value="حزن">Sad</option><option value="خوف">Fearful</option><option value="فرح">Joyful</option>
+                <option value="مطمئن">مطمئن</option><option value="قلق">قلق</option><option value="حزن">حزن</option><option value="خوف">خوف</option><option value="فرح">فرح</option>
               </select></label>
-            <label><span>Pain in the dream</span>
+            <label><span>ألم في المنام</span>
               <select id="f-alam"><option value="">—</option>
-                <option value="نعم">Yes</option><option value="لا">No</option>
+                <option value="نعم">نعم</option><option value="لا">لا</option>
               </select></label>
-            <label><span>Recurring</span>
+            <label><span>هل تكررت الرؤيا</span>
               <select id="f-takrar"><option value="">—</option>
-                <option value="نعم">Yes</option><option value="نعم، مراراً">Yes, several times</option><option value="لا">No</option>
+                <option value="نعم">نعم</option><option value="نعم، مراراً">نعم، مراراً</option><option value="لا">لا</option>
               </select></label>
-            <label><span>Time of the dream</span>
+            <label><span>وقت الرؤيا</span>
               <select id="f-waqt"><option value="">—</option>
-                <option value="أول الليل">Early night</option><option value="آخر الليل">Before dawn</option><option value="بعد الفجر">After fajr</option><option value="القيلولة">Daytime nap</option>
+                <option value="أول الليل">أول الليل</option><option value="آخر الليل">آخر الليل</option><option value="بعد الفجر">بعد الفجر</option><option value="القيلولة">القيلولة</option>
               </select></label>
-            <label><span>Istikhara prayer beforehand</span>
+            <label><span>صلاة الاستخارة قبلها</span>
               <select id="f-istikhara"><option value="">—</option>
-                <option value="نعم">Yes</option><option value="لا">No</option><option value="لم يُذكر">Not mentioned</option>
+                <option value="نعم">نعم</option><option value="لا">لا</option><option value="لم يُذكر">لم يُذكر</option>
               </select></label>
-            <label><span>Clarity of details</span>
+            <label><span>وضوح التفاصيل</span>
               <select id="f-wuduh"><option value="">—</option>
-                <option value="واضحة جداً">Very clear</option><option value="متوسطة">Somewhat clear</option><option value="مشوّشة">Hazy</option>
+                <option value="واضحة جداً">واضحة جداً</option><option value="متوسطة">متوسطة</option><option value="مشوّشة">مشوّشة</option>
               </select></label>
-            <label><span>State before sleep</span>
+            <label><span>الحالة قبل النوم</span>
               <select id="f-qabl"><option value="">—</option>
-                <option value="مطمئن">Settled</option><option value="مرهق وكثير التفكير">Exhausted, racing thoughts</option><option value="على وضوء وذكر">In wudu, remembering God</option><option value="بعد خصام أو ضيق">After conflict or distress</option>
+                <option value="مطمئن">مطمئن</option><option value="مرهق وكثير التفكير">مرهق وكثير التفكير</option><option value="على وضوء وذكر">على وضوء وذكر</option><option value="بعد خصام أو ضيق">بعد خصام أو ضيق</option>
               </select></label>
-            <label><span>Was the place familiar</span>
+            <label><span>هل المكان مألوف</span>
               <select id="f-makan"><option value="">—</option>
-                <option value="نعم، مكاني المعتاد">Yes, my own place</option><option value="مكان أعرفه">Somewhere I know</option><option value="مكان غريب">A strange place</option>
+                <option value="نعم، مكاني المعتاد">نعم، مكاني المعتاد</option><option value="مكان أعرفه">مكان أعرفه</option><option value="مكان غريب">مكان غريب</option>
               </select></label>
           </div>
         </section>
 
         <div class="form-actions">
           <button type="submit" class="btn btn--primary btn--lg">
-            Interpret my dream
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            فسّر رؤياي
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <button type="reset" class="btn btn--ghost">Clear</button>
+          <button type="reset" class="btn btn--ghost">مسح</button>
         </div>
         <p class="status" id="status" role="alert"></p>
       </form>
@@ -192,12 +192,12 @@
     <!-- Loading -->
     <section class="loading" id="loading" hidden aria-live="polite">
       <div class="loading-moon" aria-hidden="true"></div>
-      <h2>Interpreting your dream</h2>
-      <p class="loading-note">This usually takes 10–20 seconds.</p>
+      <h2>جارٍ تفسير رؤياك</h2>
+      <p class="loading-note">يستغرق ذلك عادةً من ١٠ إلى ٢٠ ثانية.</p>
       <ol class="loading-steps" id="loading-steps">
-        <li>Finding the symbols in your dream</li>
-        <li id="loading-book">Reading the books</li>
-        <li>Writing your interpretation</li>
+        <li>البحث عن رموز رؤياك</li>
+        <li id="loading-book">الرجوع إلى الكتب</li>
+        <li>كتابة التفسير</li>
       </ol>
     </section>
 
@@ -206,8 +206,8 @@
   </main>
 
   <footer class="footer">
-    This presents what the classical books say. It is not a fatwa, a ruling, or knowledge of the unseen.
-    Interpretation is probabilistic and varies with the dreamer's situation.
+    هذا عرض لما ورد في كتب التراث، وليس فتوى ولا حكماً شرعياً ولا علماً بالغيب.
+    والتفسير ظنّي يختلف باختلاف حال الرائي.
   </footer>
 
   <script src="result.js"></script>

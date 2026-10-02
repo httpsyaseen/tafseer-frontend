@@ -51,7 +51,7 @@ function tafseer_error( $message, $status ) {
 function tafseer_proxy_dream( WP_REST_Request $request ) {
 	$params = $request->get_json_params();
 	if ( ! is_array( $params ) ) {
-		return tafseer_error( 'Invalid request.', 400 );
+		return tafseer_error( 'طلب غير صالح.', 400 );
 	}
 
 	$body = array();
@@ -62,14 +62,14 @@ function tafseer_proxy_dream( WP_REST_Request $request ) {
 	}
 
 	if ( ! isset( $body['source'] ) || ! in_array( $body['source'], TAFSEER_SOURCES, true ) ) {
-		return tafseer_error( 'Please choose an authority.', 400 );
+		return tafseer_error( 'اختر المفسّر من فضلك.', 400 );
 	}
 
 	if ( empty( $body['dream'] ) ) {
-		return tafseer_error( 'Please write your dream first.', 400 );
+		return tafseer_error( 'اكتب رؤياك أولاً من فضلك.', 400 );
 	}
 	if ( mb_strlen( $body['dream'] ) > TAFSEER_MAX_DREAM_LENGTH ) {
-		return tafseer_error( sprintf( 'Please keep the dream under %d characters.', TAFSEER_MAX_DREAM_LENGTH ), 400 );
+		return tafseer_error( sprintf( 'اختصر الرؤيا إلى أقل من %d حرف من فضلك.', TAFSEER_MAX_DREAM_LENGTH ), 400 );
 	}
 
 	// The interpretation takes 10–20s; PHP must not give up before the backend does.
@@ -84,13 +84,13 @@ function tafseer_proxy_dream( WP_REST_Request $request ) {
 	) );
 
 	if ( is_wp_error( $response ) ) {
-		return tafseer_error( 'The interpretation service is unreachable.', 502 );
+		return tafseer_error( 'تعذّر الوصول إلى خدمة التفسير. حاول مرة أخرى بعد قليل.', 502 );
 	}
 
 	$status = (int) wp_remote_retrieve_response_code( $response );
 	$data   = json_decode( wp_remote_retrieve_body( $response ), true );
 	if ( ! is_array( $data ) ) {
-		return tafseer_error( 'The interpretation service returned an invalid response.', 502 );
+		return tafseer_error( 'وصل رد غير صالح من خدمة التفسير. حاول مرة أخرى بعد قليل.', 502 );
 	}
 
 	$result = new WP_REST_Response( $data, $status ?: 502 );
